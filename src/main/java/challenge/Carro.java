@@ -1,5 +1,7 @@
 package challenge;
 
+import java.util.Objects;
+
 public class Carro {
 
     private final Motorista motorista;
@@ -25,6 +27,14 @@ public class Carro {
     public Cor getCor() {
         return cor;
     }
+
+    public boolean temMotorista(){
+        if(this.getMotorista() != null){
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -76,16 +86,38 @@ public class Carro {
         }
 
         public CarroBuilder withPlaca(String placa) {
+            if(this.validaPlaca(placa)){
+                throw new NullPointerException("Você deve informar uma placa para o carro");
+            }
+
             this.placa = placa;
             return this;
         }
 
         public CarroBuilder withCor(Cor cor) {
+            if(this.validaCor(cor)){
+                throw new NullPointerException("Você deve informar um cor para o carro");
+            }
+
             this.cor = cor;
             return this;
         }
 
+
+        private boolean validaPlaca(String placa){
+            return placa.trim().isEmpty();
+        }
+
+        private boolean validaCor(Cor cor){
+            return cor.toString().trim().isEmpty();
+        }
+
+
         public Carro build() {
+
+            this.validaPlaca(placa);
+            this.validaCor(cor);
+
             return new Carro(motorista, placa, cor);
         }
     }

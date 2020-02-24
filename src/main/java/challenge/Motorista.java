@@ -1,6 +1,8 @@
 package challenge;
 
 
+import java.util.Objects;
+
 public class Motorista {
 
     private final String nome;
@@ -32,6 +34,14 @@ public class Motorista {
 
     public String getHabilitacao() {
         return habilitacao;
+    }
+
+    public boolean motoristaMenorDeIdade(){
+        return this.getIdade() < 18;
+    }
+
+    public boolean motoristaComPontuacaoAcimaDoMaximoPermitido(){
+        return this.getPontos() > 20;
     }
 
 
@@ -81,28 +91,63 @@ public class Motorista {
         }
 
         public MotoristaBuilder withNome(String nome) {
+
+            if(this.validaNome(nome)){
+                throw new NullPointerException("O motorista deve ter um nome informado");
+            }
             this.nome = nome;
             return this;
         }
 
         public MotoristaBuilder withIdade(int idade) {
+            if(validaIdade(idade)){
+                throw  new IllegalArgumentException ("O motorista tem que ter idade maior ou igual a 18 anos");
+            }
             this.idade = idade;
             return this;
         }
 
         public MotoristaBuilder withPontos(int pontos) {
+            if(this.validaPontos(pontos)){
+                throw new IllegalArgumentException("O motorista tem deve informar a pontução de sua carteira");
+            }
             this.pontos = pontos;
             return this;
         }
 
         public MotoristaBuilder withHabilitacao(String habilitacao) {
+            if(this.validaHabilitaca(habilitacao)){
+                throw  new  NullPointerException ("O motorista deve ter habilitação informada");
+            }
             this.habilitacao = habilitacao;
             return this;
         }
 
+        private boolean validaIdade(int idade){
+           return idade < 0 ? true : false;
+        }
+
+        private boolean validaHabilitaca(String habilitacao){
+            return habilitacao.trim().isEmpty();
+        }
+
+        private boolean validaNome(String nome){
+            return nome.trim().isEmpty();
+        }
+
+        private boolean validaPontos(int pontos){
+            return pontos < 0 ? true : false;
+        }
+
 
         public Motorista build() {
-            return new Motorista(nome, idade, pontos, habilitacao);
+
+            this.withNome(nome);
+            this.validaIdade(idade);
+            this.validaPontos(pontos);
+            this.validaHabilitaca(habilitacao);
+
+            return new Motorista( nome, idade, pontos, habilitacao);
         }
     }
 }
