@@ -3,7 +3,6 @@ package challenge;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Random;
 
 public class Cadastro {
 
@@ -17,6 +16,17 @@ public class Cadastro {
         String [] habilitacaoVetor = new String [] {"A","AB","B","AB","B","A","A","AB","B","B"};
      String [] placaVetor= new String []{"JVO1234","AAA1234","NTB8215","NTB8215","NTB8215","NTB8215","NTB8215","NTB8215","NTB8215","NTB8215"};
        List<Cor> list = new ArrayList<>(EnumSet.allOf(Cor.class));
+       List<Cor> listaCor = new ArrayList<>(9);
+       listaCor.add(list.get(0));
+      listaCor.add(list.get(2));
+      listaCor.add(list.get(1));
+      listaCor.add(list.get(0));
+      listaCor.add(list.get(2));
+      listaCor.add(list.get(1));
+      listaCor.add(list.get(0));
+      listaCor.add(list.get(2));
+      listaCor.add(list.get(1));
+      listaCor.add(list.get(2));
 // String [] corVetor= new String []{list.get(0).name(),list.get(1).name()};
 
            
@@ -34,7 +44,8 @@ public class Cadastro {
                                         .withHabilitacao(habilitacaoVetor[i])
                                         .build())
                         .withPlaca(placaVetor[i])
-                        .withCor(list.get(0))
+                        
+                        .withCor(listaCor.get(i))
                         .build()
                 
         );
