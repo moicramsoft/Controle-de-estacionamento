@@ -1,5 +1,5 @@
 package challenge;
 
 public enum Habilitacao {
-    A,B,AB;
+    A, B, AB;
 }

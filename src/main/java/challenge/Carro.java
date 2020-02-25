@@ -28,13 +28,12 @@ public class Carro {
         return cor;
     }
 
-    public boolean temMotorista(){
-        if(this.getMotorista() != null){
+    public boolean temMotorista() {
+        if (this.getMotorista() != null) {
             return true;
         }
         return false;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -45,9 +44,9 @@ public class Carro {
             return false;
         }
         Carro carro = (Carro) o;
-        return Objects.equals(motorista, carro.motorista) &&
-                Objects.equals(placa, carro.placa) &&
-                cor == carro.cor;
+        return Objects.equals(motorista, carro.motorista)
+                && Objects.equals(placa, carro.placa)
+                && cor == carro.cor;
     }
 
     @Override
@@ -57,17 +56,16 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Carro{" +
-                "motorista=" + motorista +
-                ", placa='" + placa + '\'' +
-                ", cor=" + cor +
-                '}';
+        return "Carro{"
+                + "motorista=" + motorista
+                + ", placa='" + placa + '\''
+                + ", cor=" + cor
+                + '}';
     }
 
     public static CarroBuilder builder() {
         return new CarroBuilder();
     }
-
 
     public static class CarroBuilder {
 
@@ -86,7 +84,7 @@ public class Carro {
         }
 
         public CarroBuilder withPlaca(String placa) {
-            if(this.validaPlaca(placa)){
+            if (this.validaPlaca(placa)) {
                 throw new NullPointerException("Você deve informar uma placa para o carro");
             }
 
@@ -95,7 +93,7 @@ public class Carro {
         }
 
         public CarroBuilder withCor(Cor cor) {
-            if(this.validaCor(cor)){
+            if (this.validaCor(cor)) {
                 throw new NullPointerException("Você deve informar um cor para o carro");
             }
 
@@ -103,15 +101,13 @@ public class Carro {
             return this;
         }
 
-
-        private boolean validaPlaca(String placa){
+        private boolean validaPlaca(String placa) {
             return placa.trim().isEmpty();
         }
 
-        private boolean validaCor(Cor cor){
+        private boolean validaCor(Cor cor) {
             return cor.toString().trim().isEmpty();
         }
-
 
         public Carro build() {
 
